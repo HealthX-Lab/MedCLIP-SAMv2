@@ -178,7 +178,7 @@ def get_parser():
                         help="Whether to filter small clusters")
     parser.add_argument('--min-size', type=int, default=100,
                         help="Minimum size of clusters to keep")
-    parser.add_argument('--num-contours', type=int, default=2, help="Number of contours to keep")
+    parser.add_argument('--num-contours', type=int, default=1, help="Number of contours to keep")
 
     return parser.parse_args()
 if __name__ == '__main__':

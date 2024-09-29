@@ -28,6 +28,7 @@ _**Abstract:** Segmentation of anatomical structures and pathological regions in
 </p>
 
 ## Datasets
+Public datasets used in our study:
 - [Radiology Objects in COntext (ROCO)](https://github.com/razorx89/roco-dataset)
 - [MedPix](https://drive.google.com/file/d/1qY_LLYRM7akV50_wOn-ItNKU5rGpfjya/view?usp=drive_link)
 - [Breast UltraSound Images (BUSI)](https://www.kaggle.com/datasets/aryashah2k/breast-ultrasound-images-dataset)
@@ -36,38 +37,7 @@ _**Abstract:** Segmentation of anatomical structures and pathological regions in
 - [Brain Tumors](https://www.kaggle.com/datasets/ashkhagan/figshare-brain-tumor-dataset)
 - [Lung CT](https://www.kaggle.com/datasets/polomarco/chest-ct-segmentation)
 
-## Colab Demo
-
-Interactive Colab demo: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/143KK2JrMH-AKhMZq1fDt_8om-183POAh?usp=sharing)
-
-![](https://github.com/TahaKoleilat/MedCLIP-SAM/blob/main/assets/MedCLIP-SAM_demo.gif)
-
-## Prerequisites & Installation
-Install anaconda following the [anaconda installation documentation](https://docs.anaconda.com/anaconda/install/).
-Create an environment with all required packages with the following command :
-```bashscript
-conda env create -f medclipsamv2_env.yml
-conda activate medclipsamv2
-```
-then setup the segment-anything library:
-```bashscript
-cd segment-anything
-pip install -e .
-cd ..
-```
-download model checkpoints for SAM and place them at `segment-anything/sam_checkpoints`
-
-### <a name="Models"></a>SAM Model Checkpoints
-
-Three model versions of the SAM model are available with different backbone sizes. These models can be instantiated by running
-
-Click the links below to download the checkpoint for the corresponding model type.
-
-- **`default` or `vit_h`: [ViT-H SAM model.](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth)**
-- `vit_l`: [ViT-L SAM model.](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_l_0b3195.pth)
-- `vit_b`: [ViT-B SAM model.](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth)
-
-finally create a directory for your data that you want to work with in the main working directory like the following:
+Create a directory for your data that you want to work with in the main working directory like the following:
 
 ```shell
 data
@@ -90,9 +60,39 @@ data
 └── ...        
 ```
 
+## Colab Demo
+
+Interactive Colab demo: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/143KK2JrMH-AKhMZq1fDt_8om-183POAh?usp=sharing)
+
+![](https://github.com/TahaKoleilat/MedCLIP-SAM/blob/main/assets/MedCLIP-SAM_demo.gif)
+
+## Prerequisites & Installation
+Install anaconda following the [anaconda installation documentation](https://docs.anaconda.com/anaconda/install/).
+Create an environment with all required packages with the following command :
+```bashscript
+conda env create -f medclipsamv2_env.yml
+conda activate medclipsamv2
+```
+then setup the segment-anything library:
+```bashscript
+cd segment-anything
+pip install -e .
+cd ..
+```
+
+### <a name="Models"></a>SAM Model Checkpoints
+
+Three model versions of the SAM model are available with different backbone sizes. These models can be instantiated by running
+
+Click the links below to download the checkpoint for the corresponding model type and place it at `segment-anything/sam_checkpoints`
+
+- **`default` or `vit_h`: [ViT-H SAM model.](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth)**
+- `vit_l`: [ViT-L SAM model.](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_l_0b3195.pth)
+- `vit_b`: [ViT-B SAM model.](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth)
+
 ## How to run
 ### DHN-NCE Loss
-You can fine-tune the BiomedCLIP pre-trained model using our [DHN-NCE Loss](https://github.com/TahaKoleilat/MedCLIP-SAM/tree/main/loss)
+You can fine-tune the BiomedCLIP pre-trained model using our [DHN-NCE Loss](https://github.com/TahaKoleilat/MedCLIP-SAMv2/tree/main/loss)
 
 ### Zero-shot Segmentation
 You can run the whole zero-shot framework with the following:
@@ -103,9 +103,6 @@ bash zeroshot.sh <path/to/dataset>
 You can change the settings by specifying which CLIP model you want to use, the post-processing algorithm, the SAM model and the type of visual prompts to use (boxes/points/both).
 
 ### Weakly Supervised Segmentation
-
-
-```
 
 
 ## Acknowledgements

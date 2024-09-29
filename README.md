@@ -92,7 +92,7 @@ Click the links below to download the checkpoint for the corresponding model typ
 
 ## How to run
 ### DHN-NCE Loss
-You can fine-tune the BiomedCLIP pre-trained model using our [DHN-NCE Loss](https://github.com/TahaKoleilat/MedCLIP-SAMv2/tree/main/loss)
+You can fine-tune the BiomedCLIP pre-trained model using our [DHN-NCE Loss](https://github.com/HealthX-Lab/MedCLIP-SAMv2/tree/main/loss)
 
 ### Zero-shot Segmentation
 You can run the whole zero-shot framework with the following:

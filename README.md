@@ -84,7 +84,7 @@ cd ..
 
 Three model versions of the SAM model are available with different backbone sizes. These models can be instantiated by running
 
-Click the links below to download the checkpoint for the corresponding model type and place it at `segment-anything/sam_checkpoints`
+Click the links below to download the checkpoint for the corresponding model type and place it at `segment-anything/sam_checkpoints/sam_vit_h_4b8939.pth`
 
 - **`default` or `vit_h`: [ViT-H SAM model.](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth)**
 - `vit_l`: [ViT-L SAM model.](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_l_0b3195.pth)
@@ -92,7 +92,9 @@ Click the links below to download the checkpoint for the corresponding model typ
 
 ## How to run
 ### DHN-NCE Loss
-You can fine-tune the BiomedCLIP pre-trained model using our [DHN-NCE Loss](https://github.com/HealthX-Lab/MedCLIP-SAMv2/tree/main/loss)
+You can fine-tune the BiomedCLIP pre-trained model using our [DHN-NCE Loss](https://github.com/HealthX-Lab/MedCLIP-SAMv2/tree/main/loss).
+
+Our fine-tuned model can be downloaded [here](https://drive.google.com/file/d/1jjnZabUlc9_gpcP0d2nz_GNS-EGX0lq5/view?usp=sharing). Place it at `saliency_maps/model/pytorch_model.bin`
 
 ### Zero-shot Segmentation
 You can run the whole zero-shot framework with the following:

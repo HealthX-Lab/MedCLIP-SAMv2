@@ -7,7 +7,7 @@
 [![paper](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/abs/2403.20253)
 [![Overview](https://img.shields.io/badge/Overview-Read-blue.svg)](#overview)
 [![Datasets](https://img.shields.io/badge/Datasets-Access-yellow.svg)](#datasets)
-[![Demo](https://img.shields.io/badge/Demo-Try-orange.svg)](#demo)
+[![Demo](https://img.shields.io/badge/Demo-Try-orange.svg)](#colab-demo)
 [![BibTeX](https://img.shields.io/badge/BibTeX-Cite-blueviolet.svg)](#bibtex)
 
 

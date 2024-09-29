@@ -128,15 +128,6 @@ parser.add_argument(
 
 parser.add_argument("--device", type=str, default="cuda", help="The device to run generation on.")
 
-def build_point_grid(n_per_side: int) -> np.ndarray:
-    """Generates a 2D grid of points evenly spaced in [0,1]x[0,1]."""
-    offset = 1 / (2 * n_per_side)
-    points_one_side = np.linspace(offset, 1 - offset, n_per_side)
-    points_x = np.tile(points_one_side[None, :], (n_per_side, 1))
-    points_y = np.tile(points_one_side[:, None], (1, n_per_side))
-    points = np.stack([points_x, points_y], axis=-1).reshape(-1, 2)
-    return points
-
 def write_mask_to_folder(mask , t_mask, path: str,num_contours) -> None:
     file = t_mask.split("/")[-1]
     filename = f"{file}"
@@ -256,8 +247,6 @@ def get_final_mask(predictor,all_random_points, all_input_labels,
             point_labels=all_input_labels,
             multimask_output=args.multimask,
         )
-        masks = masks.cpu().numpy()
-        scores = scores.cpu().numpy()
 
     elif(args.prompts == "boxes"):
         input_boxes = torch.tensor(bounding_boxes, device=args.device)  
@@ -300,6 +289,7 @@ def get_final_mask(predictor,all_random_points, all_input_labels,
     return final_mask
 
 def main(args: argparse.Namespace) -> None:
+
     print("Segmenting images using SAM...")
     sam = sam_model_registry[args.model_type](checkpoint=args.checkpoint)
     _ = sam.to(device=args.device)

@@ -46,18 +46,25 @@ def postprocess_crf(args):
         # Save the output as image
         segmented_image = map.astype('uint8')*255
 
-        if(args.filter):
-            nb_blobs, im_with_separated_blobs, stats, _ = cv2.connectedComponentsWithStats(segmented_image)
-            sizes = stats[:, cv2.CC_STAT_AREA]
-            min_size = args.min_size
-            im_result = np.zeros_like(im_with_separated_blobs)
-            for index_blob in range(1, nb_blobs):
-                if sizes[index_blob] >= min_size:
-                    im_result[im_with_separated_blobs == index_blob] = 255
-            segmented_image = im_result
+        nb_blobs, im_with_separated_blobs, stats, _ = cv2.connectedComponentsWithStats(segmented_image)
+        sizes = stats[:, cv2.CC_STAT_AREA]
+        
+        # Sort sizes (ignoring the background at index 0)
+        sorted_sizes = sorted(sizes[1:], reverse=True) 
+        
+        # Determine the top K sizes
+        top_k_sizes = sorted_sizes[:args.num_contours]
+        
+        im_result = np.zeros_like(im_with_separated_blobs)
+        
+        for index_blob in range(1, nb_blobs):
+            if sizes[index_blob] in top_k_sizes:
+                im_result[im_with_separated_blobs == index_blob] = 255
+        
+        segmented_image = im_result
 
         cv2.imwrite(output, segmented_image)
-
+        
 def postprocess_thresholding(args):
     files = os.listdir(args.sal_path)
 
@@ -73,16 +80,22 @@ def postprocess_thresholding(args):
         annos = (annos > args.threshold).astype(np.uint8)
         segmented_image = annos * 255
 
-        if(args.filter):
-            nb_blobs, im_with_separated_blobs, stats, _ = cv2.connectedComponentsWithStats(segmented_image)
-            sizes = stats[:, cv2.CC_STAT_AREA]
-            min_size = args.min_size
-            im_result = np.zeros_like(im_with_separated_blobs)
-            for index_blob in range(1, nb_blobs):
-                if sizes[index_blob] > min_size:
-                    im_result[im_with_separated_blobs == index_blob] = 255
-
-            segmented_image = im_result
+        nb_blobs, im_with_separated_blobs, stats, _ = cv2.connectedComponentsWithStats(segmented_image)
+        sizes = stats[:, cv2.CC_STAT_AREA]
+        
+        # Sort sizes (ignoring the background at index 0)
+        sorted_sizes = sorted(sizes[1:], reverse=True) 
+        
+        # Determine the top K sizes
+        top_k_sizes = sorted_sizes[:args.num_contours]
+        
+        im_result = np.zeros_like(im_with_separated_blobs)
+        
+        for index_blob in range(1, nb_blobs):
+            if sizes[index_blob] in top_k_sizes:
+                im_result[im_with_separated_blobs == index_blob] = 255
+        
+        segmented_image = im_result
 
         cv2.imwrite(output, segmented_image)
 
@@ -115,16 +128,23 @@ def postprocess_kmeans(args):
 
         segmented_image = cv2.resize(segmented_image, (w,h),interpolation=cv2.INTER_NEAREST)
         segmented_image = segmented_image.astype(np.uint8)*255
-        if(args.filter):
-            
-            nb_blobs, im_with_separated_blobs, stats, _ = cv2.connectedComponentsWithStats(segmented_image)
-            sizes = stats[:, cv2.CC_STAT_AREA]
-            min_size = args.min_size
-            im_result = np.zeros_like(im_with_separated_blobs)
-            for index_blob in range(1, nb_blobs):
-                if sizes[index_blob] > min_size:
-                    im_result[im_with_separated_blobs == index_blob] = 255
-            segmented_image = im_result
+
+        nb_blobs, im_with_separated_blobs, stats, _ = cv2.connectedComponentsWithStats(segmented_image)
+        sizes = stats[:, cv2.CC_STAT_AREA]
+        
+        # Sort sizes (ignoring the background at index 0)
+        sorted_sizes = sorted(sizes[1:], reverse=True) 
+        
+        # Determine the top K sizes
+        top_k_sizes = sorted_sizes[:args.num_contours]
+        
+        im_result = np.zeros_like(im_with_separated_blobs)
+        
+        for index_blob in range(1, nb_blobs):
+            if sizes[index_blob] in top_k_sizes:
+                im_result[im_with_separated_blobs == index_blob] = 255
+        
+        segmented_image = im_result
 
         cv2.imwrite(args.output_path+'/'+file, segmented_image)
 
@@ -158,6 +178,7 @@ def get_parser():
                         help="Whether to filter small clusters")
     parser.add_argument('--min-size', type=int, default=100,
                         help="Minimum size of clusters to keep")
+    parser.add_argument('--num-contours', type=int, default=2, help="Number of contours to keep")
 
     return parser.parse_args()
 if __name__ == '__main__':

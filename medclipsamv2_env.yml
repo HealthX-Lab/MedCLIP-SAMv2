@@ -153,8 +153,6 @@ dependencies:
   - nspr=4.32=h9c3ff4c_1
   - nss=3.76=h2350873_0
   - numexpr=2.8.1=py39h6abb31d_0
-  - numpy=1.21.2=py39h20f2e39_0
-  - numpy-base=1.21.2=py39h79a1101_0
   - opencv=4.5.5=py39hf3d152e_0
   - openh264=2.1.1=h4ff587b_0
   - openjpeg=2.4.0=hb52868f_1
@@ -239,12 +237,13 @@ dependencies:
   - pip:
     - git+https://github.com/openai/CLIP.git
     - ttach==0.0.3
-    - transformers==4.35.2 
+    - transformers
     - matplotlib
     - open_clip_torch == 2.23.0
     - opencv-python
-    - SimpleITK
     - git+https://github.com/lucasb-eyer/pydensecrf.git
-    - numpy
-prefix: ~/anaconda3/envs/gscorecam
-
+    - matplotlib==3.7.0
+    - numpy==1.23.5
+    - tqdm==4.64.1
+    - SimpleITK
+    - grad_cam==1.4.6

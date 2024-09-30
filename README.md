@@ -79,6 +79,12 @@ cd segment-anything
 pip install -e .
 cd ..
 ```
+finally setup the nnUNet framework:
+```bashscript
+cd weak_segmentation
+pip install -e .
+cd ..
+```
 
 ### <a name="Models"></a>SAM Model Checkpoints
 
@@ -106,6 +112,35 @@ You can change the settings by specifying which CLIP model you want to use, the 
 
 ### Weakly Supervised Segmentation
 
+Go to `weak_segmentation`:
+
+```bashscript
+cd weak_segmentation
+```
+
+#### Dataset Prepartion
+Please follow this [guideline](https://github.com/MIC-DKFZ/nnUNet/blob/master/documentation/dataset_format.md) to prepare your datasets. Place all your prepared datasets in `data`.
+
+#### Preprocessing
+
+```bash
+nnUNetv2_plan_and_preprocess -d DATASET_ID --verify_dataset_integrity
+```
+
+#### Training
+```bash
+nnUNetv2_train DATASET_ID 2d all --npz -num_epochs EPOCHS -num_of_cycles CYCLES
+```
+
+#### Inference and Uncertainty
+
+```bash
+nnUNetv2_predict_from_folder -dataset DATASET_ID -fold all -input_folder INPUT_PATH -output_folder OUTPUT_PATH -rule RULE
+```
+
+```bash
+nnUNetv2_run_uncertainty_on_fold --proba_dir PATH --raw_path PATH --labels PATH --score_type TYPE --output_pred_path PATH
+```
 
 ## Acknowledgements
 

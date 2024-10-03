@@ -62,7 +62,7 @@ data
 
 ## Colab Demo
 
-Interactive Colab demo: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/143KK2JrMH-AKhMZq1fDt_8om-183POAh?usp=sharing)
+Interactive Colab demo: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1Hf_ticAbO7Oyh5Rat2XqQ-FAkm4vk3RQ?usp=sharing)
 
 ## Prerequisites & Installation
 Install anaconda following the [anaconda installation documentation](https://docs.anaconda.com/anaconda/install/).
@@ -127,13 +127,13 @@ nnUNetv2_plan_and_preprocess -d DATASET_ID --verify_dataset_integrity
 
 #### Training
 ```bash
-nnUNetv2_train DATASET_ID 2d all --npz -num_epochs EPOCHS -num_of_cycles CYCLES
+nnUNetv2_train DATASET_ID 2d all --npz --num_epochs EPOCHS --num_of_cycles CYCLES
 ```
 
 #### Inference and Uncertainty
 
 ```bash
-nnUNetv2_predict_from_folder -dataset DATASET_ID -fold all -input_folder INPUT_PATH -output_folder OUTPUT_PATH -rule RULE
+nnUNetv2_predict_from_folder --dataset DATASET_ID --fold all --input_folder INPUT_PATH --output_folder OUTPUT_PATH --rule RULE
 ```
 
 ```bash

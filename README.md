@@ -8,7 +8,7 @@
 [![Overview](https://img.shields.io/badge/Overview-Read-blue.svg)](#overview)
 [![Datasets](https://img.shields.io/badge/Datasets-Access-yellow.svg)](#datasets)
 [![Demo](https://img.shields.io/badge/Demo-Try-orange.svg)](#colab-demo)
-[![BibTeX](https://img.shields.io/badge/BibTeX-Cite-blueviolet.svg)](#bibtex)
+[![BibTeX](https://img.shields.io/badge/BibTeX-Cite-blueviolet.svg)](#citing-medclip-samv2)
 
 
 

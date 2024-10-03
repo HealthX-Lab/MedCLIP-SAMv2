@@ -45,24 +45,20 @@ def generate_shades_with_alpha(scores, min_alpha=0, max_alpha=0.8):
     return red_colors
 
     
-def visualize_vandt_heatmap(tmap, vmap, text_words, image, title=None, bb=None, vtitle=None, ttitle=None, max_width=100, max_height=4):
+def visualize_vandt_heatmap(tmap, vmap, text_words, image, title=None, vtitle=None, ttitle=None, max_width=100, max_height=4):
     text_words = [x.split('<')[0] for x in text_words[1:-1]] # remove start and end tokens
     fig, axs = plt.subplots(1, 2)
-    fig.set_size_inches(6,3) 
+    fig.set_size_inches(6,3)
     #axs[0].imshow(np.float32(image)*np.expand_dims(vmap, axis=2))
     axs[0].imshow(show_cam_on_image(np.float32(image), vmap, use_rgb=True))
     # show bounding box if available
-    # if bb:
-    #     for x, y, w, h in bb:
-    #         rect = mpl.patches.Rectangle((x, y), w, h, linewidth=2, edgecolor='r', facecolor='none')
-    #         axs[0].add_patch(rect)
     axs[0].axis('off')
-    # rgba_colors = generate_shades_with_alpha(tmap[1:-1])
-    # plot_text_with_colors(axs[1], text_words, rgba_colors, max_width=max_width, max_height=max_height, fontsize=14)
-    # axs[1].set_xlim(0, max_width)
-    # axs[1].set_ylim(-max_height, max_height)
-    # axs[1].axis('off')
-    #plt.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=0, hspace=0)
+    rgba_colors = generate_shades_with_alpha(tmap[1:-1])
+    plot_text_with_colors(axs[1], text_words, rgba_colors, max_width=max_width, max_height=max_height, fontsize=14)
+    axs[1].set_xlim(0, max_width)
+    axs[1].set_ylim(-max_height, max_height)
+    axs[1].axis('off')
+    plt.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=0, hspace=0)
     plt.tight_layout()
     if title:
         plt.savefig(title,bbox_inches='tight')

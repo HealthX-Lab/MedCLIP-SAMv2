@@ -1,0 +1,16 @@
+numpy==1.23.5
+Pillow
+typing-extensions
+ttach
+kornia
+tqdm
+opencv-python
+ftfy
+regex
+scikit-image
+ipython
+git+https://github.com/openai/CLIP.git
+open_clip_torch == 2.23.0
+transformers==4.35.2 
+matplotlib
+grad_cam==1.4.6

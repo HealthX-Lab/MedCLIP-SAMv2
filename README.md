@@ -8,7 +8,7 @@
 [![Overview](https://img.shields.io/badge/Overview-Read-blue.svg)](#overview)
 [![Datasets](https://img.shields.io/badge/Datasets-Access-yellow.svg)](#datasets)
 [![Demo](https://img.shields.io/badge/Demo-Try-orange.svg)](#colab-demo)
-[![BibTeX](https://img.shields.io/badge/BibTeX-Cite-blueviolet.svg)](#cite)
+[![BibTeX](https://img.shields.io/badge/BibTeX-Cite-blueviolet.svg)](#citation)
 
 
 
@@ -144,7 +144,7 @@ nnUNetv2_run_uncertainty_on_fold --proba_dir PATH --raw_path PATH --labels PATH 
 
 Special thanks to [open_clip](https://github.com/mlfoundations/open_clip), [M2IB](https://github.com/YingWANGG/M2IB), [nnUNet](https://github.com/MIC-DKFZ/nnUNet), and [segment-anything](https://github.com/facebookresearch/segment-anything) for making their valuable code publicly available.
 
-## Citing MedCLIP-SAMv2
+## Citation
 
 If you use MedCLIP-SAM, please consider citing:
 

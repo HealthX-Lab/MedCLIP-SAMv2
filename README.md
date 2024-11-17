@@ -37,6 +37,8 @@ Public datasets used in our study:
 - [Brain Tumors](https://www.kaggle.com/datasets/ashkhagan/figshare-brain-tumor-dataset)
 - [Lung CT](https://www.kaggle.com/datasets/polomarco/chest-ct-segmentation)
 
+You can download the segmentation datasets [here](https://drive.google.com/file/d/1M3l91q96GZ9XPFYGbYhEiq3egGy6RfdZ/view?usp=sharing).
+
 Create a directory for your data that you want to work with in the main working directory like the following:
 
 ```shell
@@ -107,6 +109,8 @@ You can run the whole zero-shot framework with the following:
 bash zeroshot.sh <path/to/dataset>
 ```
 You can change the settings by specifying which CLIP model you want to use, the post-processing algorithm, the SAM model and the type of visual prompts to use (boxes/points/both).
+
+The text prompts we used can be found [here](https://github.com/HealthX-Lab/MedCLIP-SAMv2/blob/main/saliency_maps/text_prompts.py).
 
 ### Weakly Supervised Segmentation
 

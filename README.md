@@ -149,15 +149,17 @@ Special thanks to [open_clip](https://github.com/mlfoundations/open_clip), [M2IB
 If you use MedCLIP-SAM, please consider citing:
 
     @article{koleilat2024medclipsamv2,
-    title={MedCLIP-SAMv2: Towards Universal Text-Driven Medical Image Segmentation},
-    author={Koleilat, Taha and Asgariandehkordi, Hojat and Rivaz, Hassan and Xiao, Yiming},
-    journal={arXiv preprint arXiv:2409.19483},
-    year={2024}
+      title={MedCLIP-SAMv2: Towards Universal Text-Driven Medical Image Segmentation},
+      author={Koleilat, Taha and Asgariandehkordi, Hojat and Rivaz, Hassan and Xiao, Yiming},
+      journal={arXiv preprint arXiv:2409.19483},
+      year={2024}
     }
 
-    @article{koleilat2024medclipsam,
-    title={MedCLIP-SAM: Bridging Text and Image Towards Universal Medical Image Segmentation},
-    author={Koleilat, Taha and Asgariandehkordi, Hojat and Rivaz, Hassan and Xiao, Yiming},
-    journal={arXiv preprint arXiv:2403.20253},
-    year={2024}
+    @inproceedings{koleilat2024medclip,
+      title={MedCLIP-SAM: Bridging text and image towards universal medical image segmentation},
+      author={Koleilat, Taha and Asgariandehkordi, Hojat and Rivaz, Hassan and Xiao, Yiming},
+      booktitle={International Conference on Medical Image Computing and Computer-Assisted Intervention},
+      pages={643--653},
+      year={2024},
+      organization={Springer}
     }

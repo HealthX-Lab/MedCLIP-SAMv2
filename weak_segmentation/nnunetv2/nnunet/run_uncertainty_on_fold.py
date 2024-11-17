@@ -10,7 +10,7 @@ import os
 import shutil
 
 
-def run_uncertainty_on_fold(proba_dir, raw_path,score_type , labels , outpot_pred_path = False):
+def run_uncertainty_on_fold(proba_dir, raw_path,score_type , labels , output_pred_path = False):
     dice_list = []
     uncertainty_scors = []
     name_list = [name.split('.')[0].replace('_0000','') for name in os.listdir(raw_path)]
@@ -63,29 +63,29 @@ def run_uncertainty_on_fold(proba_dir, raw_path,score_type , labels , outpot_pre
             temp_dice =   dice(mask , label)
             dice_list.append(temp_dice)
         
-        if not outpot_pred_path:
-            outpot_pred_path = proba_dir + '/unnunet_pred'
-        if not os.path.exists(outpot_pred_path):
-            os.makedirs(outpot_pred_path)
+        if not output_pred_path:
+            output_pred_path = proba_dir + '/unnunet_pred'
+        if not os.path.exists(output_pred_path):
+            os.makedirs(output_pred_path)
 
         # #copy prediction mask
         # predicted_mask = proba_dir + '/checkpoint_best/' + image_name + '.png'
         # #copy prediction mask to output folder
-        # shutil.copy(predicted_mask, outpot_pred_path + '/' + image_name + '_predicted_mask.png')
+        # shutil.copy(predicted_mask, output_pred_path + '/' + image_name + '_predicted_mask.png')
 
-        cv2.imwrite(outpot_pred_path + '/' + image_name + '.png', mask)
+        cv2.imwrite(output_pred_path + '/' + image_name + '.png', mask)
         
         #save the uncertainty map
         # map_nii = nib.Nifti1Image(map, np.eye(4))
         # normalized_map = (map - np.min(map)) / (np.max(map) - np.min(map)) * 255
         # normalized_map = normalized_map.astype(np.uint8)
-        # cv2.imwrite(outpot_pred_path + '/' + image_name + '_uncertainty_map.png', normalized_map)
-        # nib.save(map_nii, outpot_pred_path + '/' + image_name + '_uncertainty_map.png')
+        # cv2.imwrite(output_pred_path + '/' + image_name + '_uncertainty_map.png', normalized_map)
+        # nib.save(map_nii, output_pred_path + '/' + image_name + '_uncertainty_map.png')
     #save the uncertainty scores, with the image names , if dice availible also dice scores.
     uncertainty_df = pd.DataFrame({'image_name': name_list, 'uncertainty_score': uncertainty_scors})
     if labels:
         uncertainty_df['dice_score'] = dice_list
-    uncertainty_df.to_csv(outpot_pred_path + '/uncertainty_scores.csv', index=False)
+    uncertainty_df.to_csv(output_pred_path + '/uncertainty_scores.csv', index=False)
     return uncertainty_df
 
         
@@ -101,7 +101,7 @@ def run_uncertainty_on_fold_entry():
     args = parser.parse_args()
 
     
-    run_uncertainty_on_fold(args.proba_dir, args.raw_path, args.score_type , args.labels , args.outpot_pred_path)
+    run_uncertainty_on_fold(args.proba_dir, args.raw_path, args.score_type , args.labels , args.output_pred_path)
 
 if __name__ == '__main__':
     run_uncertainty_on_fold_entry()

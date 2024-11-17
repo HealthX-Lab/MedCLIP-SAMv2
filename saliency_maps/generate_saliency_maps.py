@@ -13,11 +13,13 @@ import argparse
 import pandas as pd
 import itertools
 import torch
+import json
 import random
 import numpy as np
 from transformers import CLIPProcessor, CLIPModel, CLIPTokenizerFast
 from PIL import Image
 from scripts.methods import vision_heatmap_iba
+from text_prompts import *
 
 # Disable parallel tokenization warnings
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
@@ -126,6 +128,11 @@ def hyper_opt(model, processor, tokenizer, text, args):
 
 # Main function to load the model, handle input/output, and generate saliency maps
 def main(args):
+
+    torch.manual_seed(args.seed)
+    np.random.seed(args.seed)
+    random.seed(args.seed)
+
     print("Loading models ...")
     
     # Load the appropriate model based on the arguments
@@ -144,8 +151,9 @@ def main(args):
     elif(args.model_name == "CLIP" and args.finetuned):
         model = AutoModel.from_pretrained("./model", trust_remote_code=True).to(args.device)
 
-    # Get user input for the text to generate saliency maps
-    text = str(input("Enter the text: "))
+    if(not args.reproduce):
+        # Get user input for the text to generate saliency maps
+        text = str(input("Enter the text: "))
 
     # Perform hyperparameter optimization if required
     if(args.hyper_opt):
@@ -171,6 +179,13 @@ def main(args):
             print(f"Unable to load image at {image_id}", flush=True)
             continue
 
+        if(args.reproduce):
+            
+            with open(args.json_path) as json_file:
+                json_decoded = json.load(json_file)
+
+        text = json_decoded[image_id]
+
         # Preprocess the image and tokenize the text
         image_feat = processor(images=image, return_tensors="pt")['pixel_values'].to(args.device)
         text_ids = torch.tensor([tokenizer.encode(text, add_special_tokens=True)]).to(args.device)
@@ -190,17 +205,20 @@ if __name__ == '__main__':
     parser.add_argument('--input-path', required=True, default="data/input_images", type=str, help='path to the images')
     parser.add_argument('--output-path', required=True, default="saliency_map_outputs", type=str, help='path to the output')
     parser.add_argument('--val-path', type=str, default="data/val_images", help='path to the validation set for hyperparameter optimization')
-    parser.add_argument('--vbeta', type=int, default=0.1)
-    parser.add_argument('--vvar', type=int, default=1.0)
+    parser.add_argument('--vbeta', type=float, default=0.1)
+    parser.add_argument('--vvar', type=float, default=1.0)
     parser.add_argument('--vlayer', type=int, default=7)
-    parser.add_argument('--tbeta', type=int, default=0.3)
-    parser.add_argument('--tvar', type=int, default=1)
+    parser.add_argument('--tbeta', type=float, default=0.3)
+    parser.add_argument('--tvar', type=float, default=1)
     parser.add_argument('--tlayer', type=int, default=9)
     parser.add_argument('--model-name', type=str, default="BiomedCLIP", help="Which CLIP model to use")
     parser.add_argument('--finetuned', action='store_true', help="Whether to use finetuned weights or not")
     parser.add_argument('--hyper-opt', action='store_true', help="Whether to optimize hyperparameters or not")
     parser.add_argument('--device', type=str, default="cuda", help="Device to run the model on")
     parser.add_argument('--ensemble', action='store_true', help="Whether to use text ensemble or not")
+    parser.add_argument('--seed', type=int, default=42, help="Random seed for reproducibility")
+    parser.add_argument('--json-path', type=str, default="busi.json", help="Path to the JSON file containing the text prompts")
+    parser.add_argument('--reproduce', action='store_true')
     args = parser.parse_args()
     main(args)
 

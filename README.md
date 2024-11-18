@@ -37,23 +37,23 @@ Public datasets used in our study:
 - [Brain Tumors](https://www.kaggle.com/datasets/ashkhagan/figshare-brain-tumor-dataset)
 - [Lung CT](https://www.kaggle.com/datasets/polomarco/chest-ct-segmentation)
 
-You can download the segmentation datasets [here](https://drive.google.com/file/d/1M3l91q96GZ9XPFYGbYhEiq3egGy6RfdZ/view?usp=sharing).
+You can download the segmentation datasets [here](https://drive.google.com/file/d/1uYtyg3rClE-XXPNuEz7s6gYq2p48Z08p/view?usp=sharing).
 
 Create a directory for your data that you want to work with in the main working directory like the following:
 
 ```shell
 data
 ├── breast_tumors
-│   ├── images           
-│   ├── masks             
+│   ├── train_images           
+│   ├── train_masks             
 │   ├── val_images        
 │   ├── val_masks         
 │   ├── test_images       
 │   └── test_masks        
 │
 ├── brain_tumors
-│   ├── images            
-│   ├── masks            
+│   ├── train_images            
+│   ├── train_masks            
 │   ├── val_images        
 │   ├── val_masks         
 │   ├── test_images       

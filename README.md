@@ -31,7 +31,7 @@ _**Abstract:** Segmentation of anatomical structures and pathological regions in
 ## Datasets
 Public datasets used in our study:
 - [Radiology Objects in COntext (ROCO)](https://github.com/razorx89/roco-dataset)
-- [MedPix](https://drive.google.com/file/d/1qY_LLYRM7akV50_wOn-ItNKU5rGpfjya/view?usp=drive_link)
+- [MedPix](https://drive.google.com/file/d/1wzTMiSLch0nNpoi20nayRIkziLgSVStC/view?usp=sharing)
 - [Breast UltraSound Images (BUSI)](https://www.kaggle.com/datasets/aryashah2k/breast-ultrasound-images-dataset)
 - [UDIAT](https://drive.google.com/file/d/1txsA6eNFZciIrbqzwS3uOcnnkiEh3Pt4/view?usp=drive_link)
 - [COVID-QU-Ex](https://www.kaggle.com/datasets/anasmohammedtahir/covidqu)
@@ -101,7 +101,7 @@ Click the links below to download the checkpoint for the corresponding model typ
 ### DHN-NCE Loss
 You can fine-tune the BiomedCLIP pre-trained model using our [DHN-NCE Loss](https://github.com/HealthX-Lab/MedCLIP-SAMv2/tree/main/loss).
 
-Place your image-text dataset in `biomedclip_finetuning/open_clip/src/data` (please refer to the [MedPix](https://drive.google.com/file/d/1qY_LLYRM7akV50_wOn-ItNKU5rGpfjya/view?usp=drive_link) dataset to see how your custom dataset should be structured)
+Place your image-text dataset in `biomedclip_finetuning/open_clip/src/data` (please refer to the [MedPix](https://drive.google.com/file/d/1wzTMiSLch0nNpoi20nayRIkziLgSVStC/view?usp=sharing) dataset to see how your custom dataset should be structured)
 
 You can then start fine-tuning BiomedCLIP like this:
 ```bash

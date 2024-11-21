@@ -1,5 +1,7 @@
 cd biomedclip_finetuning/open_clip/src
 
+## You can change the following parameters like the GPU devices, batch size, training data, epochs, and DHN-NCE loss parameters.
+
 CUDA_VISIBLE_DEVICES=0 python3 -m open_clip_train.main \
     --batch-size 16 \
     --workers 4 \

@@ -19,6 +19,7 @@ python postprocessing/postprocess_saliency_maps.py \
 --output-path coarse_outputs/${DATASET}/masks \
 --sal-path saliency_map_outputs/${DATASET}/masks \
 --postprocess kmeans \
+--filter
 # --num-contours 2 # number of contours to extract, for lungs, use 2 contours
 
 python segment-anything/prompt_sam.py \
@@ -32,5 +33,4 @@ python segment-anything/prompt_sam.py \
 
 python evaluation/eval.py \
 --gt_path ${DATASET}/masks \
---seg_path sam_outputs/${DATASET}/masks \
---save_path sam_outputs/${DATASET}/test.csv 
+--seg_path sam_outputs/${DATASET}/masks

@@ -14,12 +14,10 @@ basename = os.path.basename
 parser = argparse.ArgumentParser()
 parser.add_argument('--gt_path', type=str, default='data/breast/test_masks')
 parser.add_argument('--seg_path', type=str, default='crf_outputs/breast/test_CRF')
-parser.add_argument('--save_path', type=str, default='br.csv')
 
 args = parser.parse_args()
 gt_path = args.gt_path
 seg_path = args.seg_path
-save_path = args.save_path
 
 # Get list of filenames
 filenames = os.listdir(seg_path)
@@ -31,7 +29,6 @@ filenames.sort()
 seg_metrics = OrderedDict(
     Name = list(),
     DSC = list(),
-    IoU = list(),
     NSD = list(),
 )
 
@@ -53,16 +50,13 @@ for name in tqdm(filenames):
     assert len(labels) > 0, 'Ground truth mask max: {}'.format(gt_data.max())
 
     DSC_arr = []
-    IoU_arr = []
     NSD_arr = []
     for i in labels:
         if np.sum(gt_data==i)==0 and np.sum(seg_data==i)==0:
             DSC_i = 1
-            IoU_i = 1
             NSD_i = 1
         elif np.sum(gt_data==i)==0 and np.sum(seg_data==i)>0:
             DSC_i = 0
-            IoU_i = 0
             NSD_i = 0
         else:
             i_gt, i_seg = gt_data == i, seg_data == i
@@ -70,44 +64,27 @@ for name in tqdm(filenames):
             # Compute Dice coefficient
             DSC_i = compute_dice_coefficient(i_gt, i_seg)
 
-            # Compute IoU
-            intersection = np.logical_and(i_gt, i_seg)
-            union = np.logical_or(i_gt, i_seg)
-            IoU_i = np.sum(intersection) / np.sum(union)
-
             # Compute NSD
             case_spacing = [1, 1, 1]
             surface_distances = compute_surface_distances(i_gt[..., None], i_seg[..., None], case_spacing)
             NSD_i = compute_surface_dice_at_tolerance(surface_distances, 2)
 
         DSC_arr.append(DSC_i)
-        IoU_arr.append(IoU_i)
         NSD_arr.append(NSD_i)
 
     DSC = np.mean(DSC_arr)
-    IoU = np.mean(IoU_arr)
     NSD = np.mean(NSD_arr)
-    seg_metrics['IoU'].append(round(IoU, 4))
     seg_metrics['DSC'].append(round(DSC, 4))
     seg_metrics['NSD'].append(round(NSD, 4))
 
 # Save metrics to CSV
 dataframe = pd.DataFrame(seg_metrics)
-dataframe.to_csv(save_path, index=False)
 
 # Calculate and print average and std deviation for metrics
 case_avg_DSC = dataframe['DSC'].mean()
-case_avg_IoU = dataframe['IoU'].mean()
 case_avg_NSD = dataframe['NSD'].mean()
-case_std_DSC = dataframe['DSC'].std()
-case_std_IoU = dataframe['IoU'].std()
-case_std_NSD = dataframe['NSD'].std()
 
 print(20 * '>')
 print(f'Average DSC for {basename(seg_path)}: {case_avg_DSC}')
-print(f'Standard deviation DSC for {basename(seg_path)}: {case_std_DSC}')
-print(f'Average IoU for {basename(seg_path)}: {case_avg_IoU}')
-print(f'Standard deviation IoU for {basename(seg_path)}: {case_std_IoU}')
 print(f'Average NSD for {basename(seg_path)}: {case_avg_NSD}')
-print(f'Standard deviation NSD for {basename(seg_path)}: {case_std_NSD}')
 print(20 * '<')

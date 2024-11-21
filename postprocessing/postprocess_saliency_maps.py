@@ -6,6 +6,8 @@ import argparse
 from sklearn.cluster import KMeans
 from tqdm import tqdm
 
+np.random.seed(10)
+
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
 

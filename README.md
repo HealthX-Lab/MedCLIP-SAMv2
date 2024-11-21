@@ -10,7 +10,8 @@
 [![Demo](https://img.shields.io/badge/Demo-Try-orange.svg)](#colab-demo)
 [![BibTeX](https://img.shields.io/badge/BibTeX-Cite-blueviolet.svg)](#citation)
 
-
+## Updates
+Due to the many requests we received for releasing the BiomedCLIP fine-tuning code, we have updated the repo and added the necessary code to do so. Follow the steps [here](#how-to-run)
 
 ## Overview
 
@@ -100,6 +101,19 @@ Click the links below to download the checkpoint for the corresponding model typ
 ### DHN-NCE Loss
 You can fine-tune the BiomedCLIP pre-trained model using our [DHN-NCE Loss](https://github.com/HealthX-Lab/MedCLIP-SAMv2/tree/main/loss).
 
+Place your image-text dataset in `biomedclip_finetuning/open_clip/src/data` (please refer to the [MedPix](https://drive.google.com/file/d/1qY_LLYRM7akV50_wOn-ItNKU5rGpfjya/view?usp=drive_link) dataset to see how your custom dataset should be structured)
+
+You can then start fine-tuning BiomedCLIP like this:
+```bash
+bash biomedclip_finetuning/scripts/biomedclip.sh
+```
+
+If you have the model saved with the `.pt` format, you can convert it to `.bin` by moving the saved model checkpoint to `saliency_maps/model` and then calling:
+
+```python
+python saliency_maps/model/convert.py
+```
+
 Our fine-tuned model can be downloaded [here](https://drive.google.com/file/d/1jjnZabUlc9_gpcP0d2nz_GNS-EGX0lq5/view?usp=sharing). Place it at `saliency_maps/model/pytorch_model.bin`
 
 ### Zero-shot Segmentation
@@ -111,6 +125,8 @@ bash zeroshot.sh <path/to/dataset>
 You can change the settings by specifying which CLIP model you want to use, the post-processing algorithm, the SAM model and the type of visual prompts to use (boxes/points/both).
 
 The text prompts we used can be found [here](https://github.com/HealthX-Lab/MedCLIP-SAMv2/blob/main/saliency_maps/text_prompts.py).
+
+Some zeroshot_scripts to reproduce the results are found at `zeroshot_scripts`.
 
 ### Weakly Supervised Segmentation
 

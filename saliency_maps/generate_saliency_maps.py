@@ -184,7 +184,7 @@ def main(args):
             with open(args.json_path) as json_file:
                 json_decoded = json.load(json_file)
 
-        text = json_decoded[image_id]
+            text = json_decoded[image_id]
 
         # Preprocess the image and tokenize the text
         image_feat = processor(images=image, return_tensors="pt")['pixel_values'].to(args.device)

@@ -30,7 +30,3 @@ python segment-anything/prompt_sam.py \
 --checkpoint segment-anything/sam_checkpoints/sam_vit_h_4b8939.pth \
 --prompts boxes \
 # --multicontour # for lungs, use this flag
-
-python evaluation/eval.py \
---gt_path ${DATASET}/masks \
---seg_path sam_outputs/${DATASET}/masks

@@ -101,11 +101,11 @@ Click the links below to download the checkpoint for the corresponding model typ
 ### DHN-NCE Loss
 You can fine-tune the BiomedCLIP pre-trained model using our [DHN-NCE Loss](https://github.com/HealthX-Lab/MedCLIP-SAMv2/tree/main/loss).
 
-Place your image-text dataset in `biomedclip_finetuning/open_clip/src/data` (please refer to the [MedPix](https://drive.google.com/file/d/1wzTMiSLch0nNpoi20nayRIkziLgSVStC/view?usp=sharing) dataset to see how your custom dataset should be structured)
+Place your image-text dataset in `biomedclip_finetuning/open_clip/src/data` (please refer to the [MedPix](https://drive.google.com/file/d/1GrTyC08-CwP90TKO2aoMOj0tTyNiafjd/view?usp=sharing) dataset to see how your custom dataset should be structured)
 
 You can then start fine-tuning BiomedCLIP like this:
 ```bash
-bash biomedclip_finetuning/scripts/biomedclip.sh
+bash biomedclip_finetuning/open_clip/scripts/biomedclip.sh
 ```
 
 If you have the model saved with the `.pt` format, you can convert it to `.bin` by moving the saved model checkpoint to `saliency_maps/model` and then calling:

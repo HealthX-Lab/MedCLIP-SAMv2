@@ -31,7 +31,7 @@ _**Abstract:** Segmentation of anatomical structures and pathological regions in
 ## Datasets
 Public datasets used in our study:
 - [Radiology Objects in COntext (ROCO)](https://github.com/razorx89/roco-dataset)
-- [MedPix](https://drive.google.com/file/d/1wzTMiSLch0nNpoi20nayRIkziLgSVStC/view?usp=sharing)
+- [MedPix](https://drive.google.com/file/d/1GrTyC08-CwP90TKO2aoMOj0tTyNiafjd/view?usp=sharing)
 - [Breast UltraSound Images (BUSI)](https://www.kaggle.com/datasets/aryashah2k/breast-ultrasound-images-dataset)
 - [UDIAT](https://drive.google.com/file/d/1txsA6eNFZciIrbqzwS3uOcnnkiEh3Pt4/view?usp=drive_link)
 - [COVID-QU-Ex](https://www.kaggle.com/datasets/anasmohammedtahir/covidqu)
